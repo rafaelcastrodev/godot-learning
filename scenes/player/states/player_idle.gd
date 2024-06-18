@@ -7,7 +7,6 @@ State PlayerIdle
 func enter() -> void:
 	super();
 	state_animated.emit("idle");
-	print_debug("Enter Idle");
 #}
 
 

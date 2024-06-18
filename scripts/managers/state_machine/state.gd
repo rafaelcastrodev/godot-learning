@@ -5,7 +5,7 @@ Base State class for the State Machine
 """
 
 signal state_transitioned(source_state, new_state_name);
-signal state_animated(animation_name);
+signal state_animated(animation_name: String);
 var active := false;
 
 func enter() -> void:

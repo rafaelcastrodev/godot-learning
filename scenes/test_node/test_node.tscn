@@ -1,0 +1,48 @@
+[gd_scene load_steps=13 format=3 uid="uid://c2br1yn8rosas"]
+
+[ext_resource type="Script" path="res://scripts/test_node.gd" id="1_gi7ls"]
+[ext_resource type="Script" path="res://scripts/CollisionShape2D.gd" id="2_2iays"]
+[ext_resource type="Script" path="res://scripts/AnimatedSprite2D.gd" id="3_r1bex"]
+[ext_resource type="Script" path="res://scripts/Node.gd" id="4_yga8v"]
+[ext_resource type="Script" path="res://scripts/Node2.gd" id="5_y07xg"]
+[ext_resource type="Script" path="res://scripts/Node3.gd" id="6_tvgf6"]
+[ext_resource type="Script" path="res://scripts/Camera2D.gd" id="7_on36q"]
+[ext_resource type="Script" path="res://scripts/Sprite2D.gd" id="8_jqnr1"]
+[ext_resource type="Script" path="res://scripts/Node4.gd" id="9_rxnpp"]
+[ext_resource type="Script" path="res://scripts/Node5.gd" id="10_slhg1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3p2g1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bjm8c"]
+
+[node name="TestNode" type="CharacterBody2D"]
+script = ExtResource("1_gi7ls")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3p2g1")
+script = ExtResource("2_2iays")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bjm8c")
+script = ExtResource("3_r1bex")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("4_yga8v")
+
+[node name="Node2" type="Node" parent="Node"]
+script = ExtResource("5_y07xg")
+
+[node name="Node3" type="Node" parent="Node"]
+script = ExtResource("6_tvgf6")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("7_on36q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+script = ExtResource("8_jqnr1")
+
+[node name="Node4" type="Node" parent="Sprite2D"]
+script = ExtResource("9_rxnpp")
+
+[node name="Node5" type="Node" parent="Sprite2D"]
+script = ExtResource("10_slhg1")

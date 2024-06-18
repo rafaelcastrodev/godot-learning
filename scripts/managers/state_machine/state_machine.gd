@@ -18,11 +18,16 @@ func _ready() -> void:
 			states[child.name.to_lower()] = child;
 			child.state_transitioned.connect(_on_state_transitioned);
 
-	if initial_state:
-		initial_state.enter();
-		current_state = initial_state;
+	#if not initial_state:
+		#initial_state = get_child(0);
 
-	print_debug("02 - States", states)
+	#initial_state.enter();
+	#current_state = initial_state;
+	call_deferred( "_trigger_on_states_ready" );
+#}
+
+
+func _trigger_on_states_ready() -> void:
 	states_ready.emit();
 #}
 

@@ -11,9 +11,7 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 func _ready() -> void:
-	print_debug("01 - Player Ready");
 	state_machine.states_ready.connect(_on_state_machine_states_ready);
-	state_machine.force_state_transition("idle");
 #}
 
 
@@ -45,20 +43,18 @@ func _handle_movement(delta: float) -> void:
 
 func _handle_animations(animation_name: String) -> void:
 	animated_sprite.play(animation_name);
-	print_debug("Animation Played: ", animation_name);
 #}
 
 
 func _on_state_machine_states_ready() -> void:
-	#var initial_state: State = state_machine.states.get("idle");
-	#initial_state.enter();
-	print_debug("04 - StateMachine started")
 	_connect_children_state_signals();
+	state_machine.force_state_transition("idle");
 #}
 
 
 func _connect_children_state_signals() -> void:
-		print_debug("03 - ", state_machine);
-	#for state in state_machine.states:
-		#state.state_animated.connect(_handle_animations);
+	for key in state_machine.states:
+		var state = state_machine.states[key];
+		if state is State:
+			state.state_animated.connect(_handle_animations);
 #}
