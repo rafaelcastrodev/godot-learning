@@ -1,30 +1,30 @@
 extends Node;
 class_name State;
 """
-Base State class for the State Machine
+Base State class for the Finite State Machine
 """
 
-signal state_transitioned(source_state, new_state_name);
+signal state_transitioned(source_state: State, new_state_name: String);
 signal state_animated(animation_name: String);
-var active := false;
+
+var is_active: bool = false;
 
 func enter() -> void:
-	#signal emit for parent node listening
 	pass;
 #}
 
 
 func exit() -> void:
-		pass;
+	pass;
 #}
 
 
 func update() -> void:
-		pass;
+	pass;
 #}
 
 
 func physics_update() -> void:
-		pass;
+	pass;
 #}
 

@@ -5,8 +5,8 @@ State PlayerRun
 
 # Runs when the state is entered
 func enter() -> void:
+	super();
 	state_animated.emit("run");
-	print_debug("Enter Run");
 #}
 
 

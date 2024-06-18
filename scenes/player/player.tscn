@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://ctbr8ai75bfqn" path="res://assets/sprites/knight.png" id="1_jhdep"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_n6b4l"]
-[ext_resource type="Script" path="res://scripts/managers/state_machine/state_machine.gd" id="2_jhkyj"]
-[ext_resource type="Script" path="res://scenes/player/states/player_idle.gd" id="3_f5jfu"]
-[ext_resource type="Script" path="res://scenes/player/states/player_run.gd" id="4_vllra"]
+[ext_resource type="Script" path="res://scenes/player/state_machine/player_state_machine.gd" id="3_8enfb"]
+[ext_resource type="Script" path="res://scenes/player/state_machine/player_idle.gd" id="4_ayros"]
+[ext_resource type="Script" path="res://scenes/player/state_machine/player_run.gd" id="5_vuo6b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fks6k"]
 atlas = ExtResource("1_jhdep")
@@ -179,10 +179,10 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource("2_jhkyj")
+script = ExtResource("3_8enfb")
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("3_f5jfu")
+script = ExtResource("4_ayros")
 
 [node name="Run" type="Node" parent="StateMachine"]
-script = ExtResource("4_vllra")
+script = ExtResource("5_vuo6b")

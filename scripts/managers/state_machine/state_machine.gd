@@ -1,16 +1,15 @@
 extends Node;
 class_name StateMachine;
 """
-State machine for managing States.
+Base StateMachine class for the Finite State Machine
 """
 
 signal states_ready;
 
-## State for the StateMachine to start in.
-@export var initial_state : State;
+@export var initial_state: State;
 
-var current_state : State;
-var states : Dictionary = {}
+var current_state: State;
+var states: Dictionary = {}
 
 func _ready() -> void:
 	for child in get_children():
@@ -56,11 +55,11 @@ func force_state_transition(new_state_name: String, close_current_state: bool = 
 
 	if current_state and close_current_state:
 		current_state.exit();
-		new_state.active = false;
-		current_state.active = false;
+		new_state.is_active = false;
+		current_state.is_active = false;
 	else:
 		new_state.enter();
-		new_state.active = true;
+		new_state.is_active = true;
 		current_state = new_state;
 #}
 
@@ -77,17 +76,17 @@ func _on_state_transitioned(source_state : State, new_state_name : String) -> vo
 		return;
 
 	# Checking for the next state. If both are fine, the transition can be made.
-	var new_state : State = states.get(new_state_name.to_lower());
+	var new_state: State = states.get(new_state_name.to_lower());
 	if not new_state:
 		printerr("New state is empty or transition state name does not match a state's name");
 
 	if current_state:
 		current_state.exit(); # Exit the old state
-		new_state.active = false;
-		current_state.active = false;
+		new_state.is_active = false;
+		current_state.is_active = false;
 
 	new_state.enter(); # Exit the new state
-	new_state.active = true;
+	new_state.is_active = true;
 	current_state = new_state;
 	print_debug("_on_state_transitioned");
 #}
