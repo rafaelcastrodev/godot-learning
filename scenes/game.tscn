@@ -1,13 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjntsan26th41"]
 
-[ext_resource type="PackedScene" uid="uid://dvey8qc5b517s" path="res://scenes/level/level.tscn" id="1_v4ruw"]
-[ext_resource type="PackedScene" uid="uid://bqfbhifa3q70x" path="res://scenes/player/player.tscn" id="2_j3ggw"]
+[ext_resource type="PackedScene" uid="uid://dk5ayipwg58gu" path="res://scenes/topdown/top_down.tscn" id="1_w2hw5"]
+[ext_resource type="PackedScene" uid="uid://ca64csivjc3jf" path="res://scenes/dino/dino.tscn" id="2_p0pnp"]
 
 [node name="GAME" type="Node2D"]
 
-[node name="Level" parent="." instance=ExtResource("1_v4ruw")]
-position = Vector2(561, 356)
-metadata/_edit_lock_ = true
+[node name="TopDown" parent="." instance=ExtResource("1_w2hw5")]
+position = Vector2(-24.1578, 17.542)
 
-[node name="Player" parent="." instance=ExtResource("2_j3ggw")]
-position = Vector2(704, 297)
+[node name="Dino" parent="TopDown" instance=ExtResource("2_p0pnp")]

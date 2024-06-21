@@ -1,4 +1,4 @@
-class_name State;
+class_name DinoState;
 extends Node;
 """
 Base State class for the Finite State Machine

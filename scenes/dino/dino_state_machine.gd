@@ -1,8 +1,5 @@
+class_name DinoStateMachine;
 extends Node;
-class_name StateMachine;
-"""
-Base StateMachine class for the Finite State Machine
-"""
 
 signal states_ready;
 
@@ -17,17 +14,23 @@ func _ready() -> void:
 			states[child.name.to_lower()] = child;
 			child.state_transitioned.connect(_on_state_transitioned);
 
-	#if not initial_state:
-		#initial_state = get_child(0);
+	if initial_state:
+		initial_state.enter();
+		current_state = initial_state;
 
-	#initial_state.enter();
-	#current_state = initial_state;
 	call_deferred( "_trigger_on_states_ready" );
 #}
 
 
 func _trigger_on_states_ready() -> void:
 	states_ready.emit();
+#}
+
+
+# The state machine subscribes to node callbacks and delegates them to the state objects.
+func _unhandled_input(event: InputEvent) -> void:
+	if current_state:
+		current_state.handle_input(event);
 #}
 
 
@@ -67,7 +70,6 @@ func force_state_transition(new_state_name: String, close_current_state: bool = 
 func _on_state_transitioned(source_state : State, new_state_name : String) -> void:
 	# Source state has to be the current active state
 	if source_state != current_state:
-		#printerr("Cannot change to "+ new_state_name +" state from " + source_state + " state");
 		printerr("Cannot change to new state state from source state");
 		return;
 
@@ -88,7 +90,5 @@ func _on_state_transitioned(source_state : State, new_state_name : String) -> vo
 	new_state.enter(); # Exit the new state
 	new_state.is_active = true;
 	current_state = new_state;
-
-	print_debug("_on_state_transitioned")
+	print_debug("_on_state_transitioned");
 #}
-

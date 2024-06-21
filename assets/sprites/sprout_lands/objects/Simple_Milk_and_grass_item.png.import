@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctbr8ai75bfqn"
-path="res://.godot/imported/knight.png-7c67c83d34932624952797d9e971a644.ctex"
+uid="uid://dylebpbw2y1md"
+path="res://.godot/imported/Simple_Milk_and_grass_item.png-edcdca805fefc9d0c279bdb6de790441.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/knight.png"
-dest_files=["res://.godot/imported/knight.png-7c67c83d34932624952797d9e971a644.ctex"]
+source_file="res://assets/sprites/sprout_lands/objects/Simple_Milk_and_grass_item.png"
+dest_files=["res://.godot/imported/Simple_Milk_and_grass_item.png-edcdca805fefc9d0c279bdb6de790441.ctex"]
 
 [params]
 

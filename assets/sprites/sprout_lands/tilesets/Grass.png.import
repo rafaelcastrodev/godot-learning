@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cplk6m4r24n2j"
-path="res://.godot/imported/slime_green.png-f6349164bf3a0f5189bb927b97af9c58.ctex"
+uid="uid://vck4otvfmq0r"
+path="res://.godot/imported/Grass.png-2c2e815c181fa42df65b9236e3679523.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/slime_green.png"
-dest_files=["res://.godot/imported/slime_green.png-f6349164bf3a0f5189bb927b97af9c58.ctex"]
+source_file="res://assets/sprites/sprout_lands/tilesets/Grass.png"
+dest_files=["res://.godot/imported/Grass.png-2c2e815c181fa42df65b9236e3679523.ctex"]
 
 [params]
 
