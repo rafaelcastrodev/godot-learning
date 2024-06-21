@@ -52,7 +52,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var _character_direction = _get_character_direction_normalized();
+	_character_direction = _get_character_direction_normalized();
 	_current_delta = delta;
 
 	handle_player_interactions();

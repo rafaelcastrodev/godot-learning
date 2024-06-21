@@ -3,34 +3,20 @@ extends Node;
 
 signal states_ready;
 
-@export var initial_state: State;
-
-var current_state: State;
+var current_state: DinoState;
 var states: Dictionary = {}
+
 
 func _ready() -> void:
 	for child in get_children():
-		if child is State:
+		if child is DinoState:
 			states[child.name.to_lower()] = child;
 			child.state_transitioned.connect(_on_state_transitioned);
 
-	if initial_state:
-		initial_state.enter();
-		current_state = initial_state;
+	if current_state:
+		current_state.enter();
 
 	call_deferred( "_trigger_on_states_ready" );
-#}
-
-
-func _trigger_on_states_ready() -> void:
-	states_ready.emit();
-#}
-
-
-# The state machine subscribes to node callbacks and delegates them to the state objects.
-func _unhandled_input(event: InputEvent) -> void:
-	if current_state:
-		current_state.handle_input(event);
 #}
 
 
@@ -46,12 +32,24 @@ func _physics_process(delta : float) -> void:
 #}
 
 
+func _trigger_on_states_ready() -> void:
+	states_ready.emit();
+#}
+
+
+# The state machine subscribes to node callbacks and delegates them to the state objects.
+func _unhandled_input(event: InputEvent) -> void:
+	if current_state:
+		current_state.handle_input(event);
+#}
+
+
 func force_state_transition(new_state_name: String, close_current_state: bool = false) -> void:
-	var new_state : State = states.get(new_state_name.to_lower());
+	var new_state : DinoState = states.get(new_state_name.to_lower());
 
 	if not new_state:
 		printerr(
-			"Cannot force state transition. New state is empty or transition state name does
+			"Cannot force state " + new_state_name + " transition. New state is empty or transition state name does
 			not match a state's name"
 			);
 		return;
@@ -67,7 +65,7 @@ func force_state_transition(new_state_name: String, close_current_state: bool = 
 #}
 
 
-func _on_state_transitioned(source_state : State, new_state_name : String) -> void:
+func _on_state_transitioned(source_state : DinoState, new_state_name : String) -> void:
 	# Source state has to be the current active state
 	if source_state != current_state:
 		printerr("Cannot change to new state state from source state");
@@ -78,7 +76,7 @@ func _on_state_transitioned(source_state : State, new_state_name : String) -> vo
 		return;
 
 	# Checking for the next state. If both are fine, the transition can be made.
-	var new_state: State = states.get(new_state_name.to_lower());
+	var new_state: DinoState = states.get(new_state_name.to_lower());
 	if not new_state:
 		printerr("New state is empty or transition state name does not match a state's name");
 
@@ -90,5 +88,4 @@ func _on_state_transitioned(source_state : State, new_state_name : String) -> vo
 	new_state.enter(); # Exit the new state
 	new_state.is_active = true;
 	current_state = new_state;
-	print_debug("_on_state_transitioned");
 #}

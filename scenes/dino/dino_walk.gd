@@ -1,7 +1,6 @@
 class_name DinoWalk;
 extends DinoState;
 
-## owner => Dino(CharacterBody2D), in other words the top parent node
 
 func _ready() -> void:
 	super();
@@ -10,7 +9,9 @@ func _ready() -> void:
 
 func enter() -> void:
 	super();
-	animator.play("idle");
+	owner.character_speed = 60.0;
+	print("State: Walk");
+	animator.play("walk");
 #}
 
 
@@ -21,14 +22,14 @@ func exit() -> void:
 
 # Updates every _process() update (When state is_active)
 func update(delta: float) -> void:
-	if owner.velocity == Vector2.ZERO:
-		pass
 
-	if Input.is_action_just_pressed("attack"):
-		pass
+	if owner.character_direction == Vector2.ZERO:
+		state_transitioned.emit(self, "idle");
+		return;
 
-	if Input.is_action_just_pressed("jump"):
-		pass
+	if owner.is_character_running:
+		state_transitioned.emit(self, "run");
+		return;
 #}
 
 
@@ -36,3 +37,4 @@ func update(delta: float) -> void:
 func physics_update(delta: float) -> void:
 	pass;
 #}
+

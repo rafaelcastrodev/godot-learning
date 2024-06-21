@@ -1,11 +1,10 @@
-[gd_scene load_steps=34 format=3 uid="uid://ca64csivjc3jf"]
+[gd_scene load_steps=33 format=3 uid="uid://ca64csivjc3jf"]
 
 [ext_resource type="Script" path="res://scenes/dino/dino.gd" id="1_2srua"]
 [ext_resource type="Script" path="res://scenes/dino/dino_state_machine.gd" id="3_rjyfx"]
 [ext_resource type="Texture2D" uid="uid://w5kwednf1iua" path="res://assets/sprites/dinos/dinos.png" id="3_tol6h"]
 [ext_resource type="Script" path="res://scenes/dino/dino_idle.gd" id="4_l05l3"]
 [ext_resource type="Script" path="res://scenes/dino/dino_walk.gd" id="5_t2aky"]
-[ext_resource type="Script" path="res://scenes/dino/dino_run.gd" id="6_l6dwk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0vfp2"]
 radius = 8.0
@@ -244,9 +243,6 @@ script = ExtResource("4_l05l3")
 
 [node name="Walk" type="Node" parent="DinoStateMachine"]
 script = ExtResource("5_t2aky")
-
-[node name="Run" type="Node" parent="DinoStateMachine"]
-script = ExtResource("6_l6dwk")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)

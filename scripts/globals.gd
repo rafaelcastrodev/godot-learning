@@ -1,3 +1,4 @@
+class_name GameGlobals;
 extends Node;
 
 signal game_paused(is_game_paused: bool);
@@ -10,6 +11,7 @@ func _process(delta: float) -> void:
 #}
 
 func _pause_game() -> void:
+
 	if is_game_paused:
 		get_tree().paused = false;
 	else:
