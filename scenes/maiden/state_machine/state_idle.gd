@@ -10,7 +10,7 @@ func _ready() -> void:
 func enter() -> void:
 	super();
 	character.velocity = Vector2.ZERO;
-	animator.play(character.PlayerAnimations.IDLE);
+	character.animator.play(character.CharacterAnimations.IDLE);
 #}
 
 
@@ -24,13 +24,19 @@ func update(delta: float) -> void:
 	if not character.character_direction:
 		return;
 
-	state_transitioned.emit(self, character.PlayerStates.WALK);
+	state_transitioned.emit(self, character.CharacterStates.WALK);
 #}
 
 
 
 func physics_update(delta: float) -> void:
-	if character.is_on_floor() and Input.is_action_just_pressed(character.PlayerActions.JUMP):
-		state_transitioned.emit(self, character.PlayerStates.JUMP);
+	if character.is_on_floor():
+
+		if Input.is_action_just_pressed(character.CharacterActions.JUMP):
+			state_transitioned.emit(self, character.CharacterStates.JUMP);
+
+		if Input.is_action_just_pressed(character.CharacterActions.ATTACK):
+			state_transitioned.emit(self, character.CharacterStates.ATTACK);
+
 #}
 

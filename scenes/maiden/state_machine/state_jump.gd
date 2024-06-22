@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func enter() -> void:
 	super();
-	animator.play(character.PlayerAnimations.JUMP);
+	character.animator.play(character.CharacterAnimations.JUMP);
 	is_jumping_peak = false;
 	_apply_jump_force();
 #}
@@ -27,14 +27,10 @@ func update(delta: float) -> void:
 
 
 func physics_update(delta: float) -> void:
-	if character.velocity.y > 0:
-		animator.play(character.PlayerAnimations.UP_TO_FALL);
-		return;
-	#if character.velocity.y < 0 and not is_jumping_peak:
-		#is_jumping_peak = true;
 
-	if character.is_on_floor():
-		state_transitioned.emit(self, character.PlayerStates.IDLE);
+	if character.velocity.y > 0:
+		state_transitioned.emit(self, character.CharacterStates.UP_TO_FALL);
+		return;
 #}
 
 

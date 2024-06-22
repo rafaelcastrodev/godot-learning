@@ -1,11 +1,15 @@
-[gd_scene load_steps=112 format=3 uid="uid://byyp0r3cbdaon"]
+[gd_scene load_steps=116 format=3 uid="uid://byyp0r3cbdaon"]
 
 [ext_resource type="Texture2D" uid="uid://bct7kw2jmilsx" path="res://assets/sprites/maiden/maiden.png" id="1_5oyxx"]
 [ext_resource type="Script" path="res://scenes/maiden/maiden.gd" id="1_8bc7t"]
 [ext_resource type="Script" path="res://scripts/managers/state_machine/state_machine.gd" id="3_si2q1"]
+[ext_resource type="Script" path="res://scenes/maiden/state_machine/state_attack.gd" id="4_3kpxr"]
 [ext_resource type="Script" path="res://scenes/maiden/state_machine/state_idle.gd" id="4_j1h2a"]
+[ext_resource type="Script" path="res://scenes/maiden/state_machine/state_death.gd" id="4_u7y0m"]
 [ext_resource type="Script" path="res://scenes/maiden/state_machine/state_jump.gd" id="5_lckli"]
+[ext_resource type="Script" path="res://scenes/maiden/state_machine/state_hurt.gd" id="5_nb8a6"]
 [ext_resource type="Script" path="res://scenes/maiden/state_machine/state_walk.gd" id="5_owxvm"]
+[ext_resource type="Script" path="res://scenes/maiden/state_machine/state_up_to_fall.gd" id="8_vobij"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xfnf3"]
 radius = 7.0
@@ -425,10 +429,10 @@ region = Rect2(138, 440, 69, 44)
 [sub_resource type="SpriteFrames" id="SpriteFrames_xenns"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_oxrwo")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_fmqwt")
 }, {
 "duration": 1.0,
@@ -443,16 +447,16 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o80wq")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_snouq")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0s5tq")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_tc4bj")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_a",
 "speed": 8.0
 }, {
@@ -469,9 +473,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yts4o")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_b",
-"speed": 7.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -492,7 +496,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_c56bs")
 }],
-"loop": true,
+"loop": false,
 "name": &"crouch",
 "speed": 8.0
 }, {
@@ -518,7 +522,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7v7k5")
 }],
-"loop": true,
+"loop": false,
 "name": &"dash",
 "speed": 10.0
 }, {
@@ -553,7 +557,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y18g8")
 }],
-"loop": true,
+"loop": false,
 "name": &"dash_attack",
 "speed": 10.0
 }, {
@@ -591,7 +595,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n40h1")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 7.0
 }, {
@@ -611,7 +615,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0dlpp")
 }],
-"loop": true,
+"loop": false,
 "name": &"edge_grab",
 "speed": 8.0
 }, {
@@ -665,7 +669,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_88q35")
 }],
-"loop": true,
+"loop": false,
 "name": &"hurt",
 "speed": 7.0
 }, {
@@ -734,7 +738,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3215o")
 }],
-"loop": true,
+"loop": false,
 "name": &"ladder_grab",
 "speed": 7.0
 }, {
@@ -754,7 +758,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_555k4")
 }],
-"loop": true,
+"loop": false,
 "name": &"slide",
 "speed": 10.0
 }, {
@@ -802,7 +806,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 10.0
+"speed": 11.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -821,10 +825,10 @@ animations = [{
 
 [node name="Maiden" type="CharacterBody2D"]
 script = ExtResource("1_8bc7t")
-character_speed = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -15)
+visible = false
+position = Vector2(-1, -15.2)
 shape = SubResource("CapsuleShape2D_xfnf3")
 
 [node name="AnimatorFliper" type="Node2D" parent="."]
@@ -832,17 +836,16 @@ shape = SubResource("CapsuleShape2D_xfnf3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatorFliper"]
 position = Vector2(7, -21)
 sprite_frames = SubResource("SpriteFrames_xenns")
-animation = &"up_to_fall"
+animation = &"attack_a"
 autoplay = "idle"
-frame = 3
+frame = 8
 frame_progress = 1.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_si2q1")
 
-[node name="AttackA" type="Node" parent="StateMachine"]
-
-[node name="AttackB" type="Node" parent="StateMachine"]
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("4_3kpxr")
 
 [node name="Crouch" type="Node" parent="StateMachine"]
 
@@ -851,6 +854,7 @@ script = ExtResource("3_si2q1")
 [node name="DashAttack" type="Node" parent="StateMachine"]
 
 [node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("4_u7y0m")
 
 [node name="EdgeGrab" type="Node" parent="StateMachine"]
 
@@ -859,6 +863,7 @@ script = ExtResource("3_si2q1")
 [node name="Fall" type="Node" parent="StateMachine"]
 
 [node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource("5_nb8a6")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("4_j1h2a")
@@ -871,6 +876,7 @@ script = ExtResource("5_lckli")
 [node name="Slide" type="Node" parent="StateMachine"]
 
 [node name="UpToFall" type="Node" parent="StateMachine"]
+script = ExtResource("8_vobij")
 
 [node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource("5_owxvm")
@@ -878,5 +884,6 @@ script = ExtResource("5_owxvm")
 [node name="WallSlide" type="Node" parent="StateMachine"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2(-1, -24)
 zoom = Vector2(3, 3)

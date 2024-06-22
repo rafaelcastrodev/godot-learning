@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjntsan26th41"]
+[gd_scene load_steps=4 format=3 uid="uid://cjntsan26th41"]
 
 [ext_resource type="PackedScene" uid="uid://dvey8qc5b517s" path="res://scenes/level/level.tscn" id="1_nk3tj"]
 [ext_resource type="PackedScene" uid="uid://byyp0r3cbdaon" path="res://scenes/maiden/maiden.tscn" id="2_oilef"]
+[ext_resource type="PackedScene" uid="uid://q4bo8p20bg3i" path="res://scenes/enemy/enemy.tscn" id="3_jlykg"]
 
 [node name="GAME" type="Node2D"]
 
 [node name="Level" parent="." instance=ExtResource("1_nk3tj")]
 
 [node name="Maiden" parent="." instance=ExtResource("2_oilef")]
-position = Vector2(480, -183)
-character_speed = 110.0
+position = Vector2(169, -2)
+
+[node name="Enemy" parent="." instance=ExtResource("3_jlykg")]
+position = Vector2(316, 0)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_jlykg")]
+position = Vector2(504, 0)
