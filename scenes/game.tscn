@@ -1,12 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjntsan26th41"]
 
-[ext_resource type="PackedScene" uid="uid://dk5ayipwg58gu" path="res://scenes/topdown/top_down.tscn" id="1_w2hw5"]
-[ext_resource type="PackedScene" uid="uid://ca64csivjc3jf" path="res://scenes/player/player.tscn" id="2_5spai"]
+[ext_resource type="PackedScene" uid="uid://dvey8qc5b517s" path="res://scenes/level/level.tscn" id="1_nk3tj"]
+[ext_resource type="PackedScene" uid="uid://byyp0r3cbdaon" path="res://scenes/maiden/maiden.tscn" id="2_oilef"]
 
 [node name="GAME" type="Node2D"]
 
-[node name="TopDown" parent="." instance=ExtResource("1_w2hw5")]
-position = Vector2(-24.1578, 17.542)
+[node name="Level" parent="." instance=ExtResource("1_nk3tj")]
+metadata/_edit_lock_ = true
 
-[node name="Player" parent="." instance=ExtResource("2_5spai")]
-position = Vector2(-82, 26)
+[node name="Maiden" parent="." instance=ExtResource("2_oilef")]
+position = Vector2(-153, 0)
+character_speed = 110.0

@@ -3,10 +3,11 @@ extends Node;
 """
 Base State class for the Finite State Machine
 """
-signal state_transitioned(source_state: State, new_state_name: String);
-signal state_animated(animation_name: String);
+signal state_transitioned(source_state: PlayerState, new_state_name: String);
 
+var character: CharacterBody2D;
 var animator: AnimatedSprite2D;
+var collision: CollisionShape2D;
 var is_active: bool = false;
 
 func _ready() -> void:
@@ -21,6 +22,7 @@ func handle_input(event: InputEvent) -> void:
 
 func enter() -> void:
 	set_physics_process(true);
+	print("Enter State: ", self);
 #}
 
 
