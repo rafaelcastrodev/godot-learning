@@ -1,5 +1,5 @@
-class_name DinoIdle;
-extends DinoState;
+class_name PlayerCrouch;
+extends PlayerState;
 
 
 func _ready() -> void:
@@ -9,9 +9,8 @@ func _ready() -> void:
 
 func enter() -> void:
 	super();
-	owner.velocity = Vector2.ZERO;
-	print("State: Idle")
-	animator.play("idle");
+	owner.character_speed = 30.0;
+	animator.play("crouch");
 #}
 
 
@@ -22,12 +21,12 @@ func exit() -> void:
 
 # Updates every _process() update (When state is_active)
 func update(delta: float) -> void:
-
-	if owner.character_direction == Vector2.ZERO:
+	return;
+	if owner.is_character_crouching:
 		return;
 
-	if owner.is_character_running:
-		state_transitioned.emit(self, "run");
+	if owner.character_direction == Vector2.ZERO:
+		state_transitioned.emit(self, "idle");
 		return;
 
 	state_transitioned.emit(self, "walk");
@@ -38,4 +37,5 @@ func update(delta: float) -> void:
 func physics_update(delta: float) -> void:
 	pass;
 #}
+
 

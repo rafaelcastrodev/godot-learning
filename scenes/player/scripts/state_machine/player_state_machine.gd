@@ -1,15 +1,15 @@
-class_name DinoStateMachine;
+class_name PlayerStateMachine;
 extends Node;
 
 signal states_ready;
 
-var current_state: DinoState;
+var current_state: PlayerState;
 var states: Dictionary = {}
 
 
 func _ready() -> void:
 	for child in get_children():
-		if child is DinoState:
+		if child is PlayerState:
 			states[child.name.to_lower()] = child;
 			child.state_transitioned.connect(_on_state_transitioned);
 
@@ -45,7 +45,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func force_state_transition(new_state_name: String, close_current_state: bool = false) -> void:
-	var new_state : DinoState = states.get(new_state_name.to_lower());
+	var new_state : PlayerState = states.get(new_state_name.to_lower());
 
 	if not new_state:
 		printerr(
@@ -65,10 +65,10 @@ func force_state_transition(new_state_name: String, close_current_state: bool = 
 #}
 
 
-func _on_state_transitioned(source_state : DinoState, new_state_name : String) -> void:
+func _on_state_transitioned(source_state : PlayerState, new_state_name : String) -> void:
 	# Source state has to be the current active state
 	if source_state != current_state:
-		printerr("Cannot change to new state state from source state");
+		printerr("Cannot change to " + new_state_name + " state state from source state");
 		return;
 
 	if not current_state:
@@ -76,9 +76,9 @@ func _on_state_transitioned(source_state : DinoState, new_state_name : String) -
 		return;
 
 	# Checking for the next state. If both are fine, the transition can be made.
-	var new_state: DinoState = states.get(new_state_name.to_lower());
+	var new_state: PlayerState = states.get(new_state_name.to_lower());
 	if not new_state:
-		printerr("New state is empty or transition state name does not match a state's name");
+		printerr("New state " + new_state_name + " is empty or transition state name does not match a state's name");
 
 	if current_state:
 		current_state.exit(); # Exit the old state

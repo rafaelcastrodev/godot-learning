@@ -1,9 +1,9 @@
-class_name DinoState;
+class_name PlayerState;
 extends Node;
 """
 Base State class for the Finite State Machine
 """
-signal state_transitioned(source_state: DinoState, new_state_name: String);
+signal state_transitioned(source_state: PlayerState, new_state_name: String);
 signal state_animated(animation_name: String);
 
 var character: CharacterBody2D;

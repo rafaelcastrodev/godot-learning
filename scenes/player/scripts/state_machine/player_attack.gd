@@ -1,5 +1,5 @@
-class_name DinoRun;
-extends DinoState;
+class_name PlayerAttack;
+extends PlayerState;
 
 
 func _ready() -> void:
@@ -9,9 +9,7 @@ func _ready() -> void:
 
 func enter() -> void:
 	super();
-	owner.character_speed = 100.0;
-	print("State: Run")
-	animator.play("run");
+	animator.play("attack");
 #}
 
 
@@ -22,15 +20,7 @@ func exit() -> void:
 
 # Updates every _process() update (When state is_active)
 func update(delta: float) -> void:
-
-	if owner.is_character_running:
-		return;
-
-	if owner.character_direction == Vector2.ZERO:
-		state_transitioned.emit(self, "idle");
-		return;
-
-	state_transitioned.emit(self, "walk");
+	pass
 #}
 
 
@@ -38,5 +28,4 @@ func update(delta: float) -> void:
 func physics_update(delta: float) -> void:
 	pass;
 #}
-
 

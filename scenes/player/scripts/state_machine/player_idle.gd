@@ -1,5 +1,5 @@
-class_name DinoWalk;
-extends DinoState;
+class_name PlayerIdle;
+extends PlayerState;
 
 
 func _ready() -> void:
@@ -9,9 +9,9 @@ func _ready() -> void:
 
 func enter() -> void:
 	super();
-	owner.character_speed = 60.0;
-	print("State: Walk");
-	animator.play("walk");
+	owner.velocity = Vector2.ZERO;
+	print("State: Idle")
+	animator.play("idle");
 #}
 
 
@@ -24,12 +24,13 @@ func exit() -> void:
 func update(delta: float) -> void:
 
 	if owner.character_direction == Vector2.ZERO:
-		state_transitioned.emit(self, "idle");
 		return;
 
 	if owner.is_character_running:
 		state_transitioned.emit(self, "run");
 		return;
+
+	state_transitioned.emit(self, "walk");
 #}
 
 
