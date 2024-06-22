@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func enter() -> void:
 	super();
-	animator.play(owner.PlayerAnimations.WALK);
+	animator.play(character.PlayerAnimations.WALK);
 #}
 
 
@@ -21,16 +21,16 @@ func exit() -> void:
 
 func update(delta: float) -> void:
 
-	if not owner.character_direction:
-		state_transitioned.emit(self, owner.PlayerStates.IDLE);
+	if not character.character_direction:
+		state_transitioned.emit(self, character.PlayerStates.IDLE);
 		return;
 #}
 
 
 
 func physics_update(delta: float) -> void:
-	if owner.is_on_floor() and Input.is_action_just_pressed(owner.PlayerActions.JUMP):
-		state_transitioned.emit(self, owner.PlayerStates.JUMP);
+	if character.is_on_floor() and Input.is_action_just_pressed(character.PlayerActions.JUMP):
+		state_transitioned.emit(self, character.PlayerStates.JUMP);
 #}
 
 

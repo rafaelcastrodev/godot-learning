@@ -1,6 +1,7 @@
 ## Maiden Jump State
 extends State;
 
+var is_jumping_peak: bool = false;
 
 func _ready() -> void:
 	super();
@@ -9,7 +10,8 @@ func _ready() -> void:
 
 func enter() -> void:
 	super();
-	animator.play(owner.PlayerAnimations.JUMP);
+	animator.play(character.PlayerAnimations.JUMP);
+	is_jumping_peak = false;
 	_apply_jump_force();
 #}
 
@@ -25,12 +27,17 @@ func update(delta: float) -> void:
 
 
 func physics_update(delta: float) -> void:
-	if not owner.is_on_floor():
+	if character.velocity.y > 0:
+		animator.play(character.PlayerAnimations.UP_TO_FALL);
 		return;
-	state_transitioned.emit(self, owner.PlayerStates.IDLE);
+	#if character.velocity.y < 0 and not is_jumping_peak:
+		#is_jumping_peak = true;
+
+	if character.is_on_floor():
+		state_transitioned.emit(self, character.PlayerStates.IDLE);
 #}
 
 
 func _apply_jump_force() -> void:
-	owner.velocity.y = owner.jump_velocity * (-1);
+	character.velocity.y = character.jump_velocity * (-1);
 #}

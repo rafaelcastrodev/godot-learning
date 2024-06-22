@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://byyp0r3cbdaon"]
+[gd_scene load_steps=112 format=3 uid="uid://byyp0r3cbdaon"]
 
 [ext_resource type="Texture2D" uid="uid://bct7kw2jmilsx" path="res://assets/sprites/maiden/maiden.png" id="1_5oyxx"]
 [ext_resource type="Script" path="res://scenes/maiden/maiden.gd" id="1_8bc7t"]
@@ -294,17 +294,21 @@ region = Rect2(276, 0, 69, 44)
 atlas = ExtResource("1_5oyxx")
 region = Rect2(345, 0, 69, 44)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qs4ib"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_toqj5"]
 atlas = ExtResource("1_5oyxx")
 region = Rect2(345, 264, 69, 44)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y2stj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ein2l"]
 atlas = ExtResource("1_5oyxx")
 region = Rect2(0, 308, 69, 44)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q2y5h"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_plx1k"]
 atlas = ExtResource("1_5oyxx")
 region = Rect2(69, 308, 69, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kspm"]
+atlas = ExtResource("1_5oyxx")
+region = Rect2(138, 308, 69, 44)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dxbob"]
 atlas = ExtResource("1_5oyxx")
@@ -358,13 +362,21 @@ region = Rect2(345, 616, 69, 44)
 atlas = ExtResource("1_5oyxx")
 region = Rect2(0, 660, 69, 44)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q4d7p"]
-atlas = ExtResource("1_5oyxx")
-region = Rect2(138, 308, 69, 44)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hvwg2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfmdc"]
 atlas = ExtResource("1_5oyxx")
 region = Rect2(207, 308, 69, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47kg2"]
+atlas = ExtResource("1_5oyxx")
+region = Rect2(276, 308, 69, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sl4e3"]
+atlas = ExtResource("1_5oyxx")
+region = Rect2(345, 308, 69, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhi7g"]
+atlas = ExtResource("1_5oyxx")
+region = Rect2(0, 352, 69, 44)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_28t1y"]
 atlas = ExtResource("1_5oyxx")
@@ -682,17 +694,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qs4ib")
+"texture": SubResource("AtlasTexture_toqj5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y2stj")
+"texture": SubResource("AtlasTexture_ein2l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q2y5h")
+"texture": SubResource("AtlasTexture_plx1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kspm")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -745,14 +760,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q4d7p")
+"texture": SubResource("AtlasTexture_gfmdc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hvwg2")
+"texture": SubResource("AtlasTexture_47kg2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sl4e3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhi7g")
 }],
-"loop": true,
+"loop": false,
 "name": &"up_to_fall",
-"speed": 10.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -811,10 +832,10 @@ shape = SubResource("CapsuleShape2D_xfnf3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatorFliper"]
 position = Vector2(7, -21)
 sprite_frames = SubResource("SpriteFrames_xenns")
-animation = &"idle"
+animation = &"up_to_fall"
 autoplay = "idle"
-frame = 4
-frame_progress = 0.600432
+frame = 3
+frame_progress = 1.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_si2q1")
